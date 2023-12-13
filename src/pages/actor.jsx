@@ -53,8 +53,8 @@ const Actor = () => {
         // Function to fetch data from the API
         const fetchData3 = async () => {
           try {
-            const response3 = await fetch(`http://localhost:5001/api/knownfor/`);
-            if (!response3.ok) {
+            const response3 = await fetch(`http://localhost:5001/api/knownfor/${id}`);
+            if (!response3.ok) { 
               throw new Error('Network response was not ok.');
             }
             const jsonData3 = await response3.json();

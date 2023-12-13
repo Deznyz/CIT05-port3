@@ -59,7 +59,7 @@ const Movie = () => {
         </div>
         <div className="col-md-8">
           <h2>{data.primaryTitle}</h2>
-          <p>{data2.items[0].plot}</p>
+          <p>{data2.items.plot}</p>
           <hr className="text-white" />
             <h4>Actors:</h4>
             <ul>
