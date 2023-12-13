@@ -56,7 +56,7 @@ const Home = () => {
 
     fetchData2();
 
-  }, []); // Empty dependency array to run effect only once
+  }, []);
 
 
 
