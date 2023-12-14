@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Form, Button, Col } from 'react-bootstrap';
 import SiteNavbar from './Components/navbar';
 import Cookies from 'js-cookie';
-import { useHistory } from 'react-router-dom';
 
 const CreateUser = () => {
   const [username, setUsername] = useState('');
