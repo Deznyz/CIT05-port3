@@ -23,6 +23,7 @@ import Login from './pages/login';
 import CreateUser from './pages/create-user';
 import MovieSite from './pages/movie';
 import ActorSite from './pages/actor';
+import UserProfile from './pages/user-profile';
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
         <Route path="/create-user" element={<CreateUser/>}/>
         <Route path="/movie/:id" element={<MovieSite/>}/>
         <Route path="/actor/:id" element={<ActorSite/>}/>
+        <Route path="/user-profile" element={<UserProfile/>}/>
       </Routes>
     </Router>
   );
