@@ -4,84 +4,98 @@ import SiteNavbar from './Components/navbar';
 import MovieWidget from './Components/moviewidget';
 import { Stack, Container, Row } from 'react-bootstrap';
 import RatingScale from './Components/ratingscale';
+import CoactorWidget from './Components/coactorwidget';
+import ActorWidget from './Components/actorwidget';
 
 const Actor = () => {
   const { id } = useParams();
 
-  const [data1, setData1] = useState({ items: [] });
-  const [data2, setData2] = useState({ items: [] });
-  const [data3, setData3] = useState({ items: [] });
+  const [namesData, setNamesData] = useState({ items: [] });
+  const [knownforData, setKnownforData] = useState({ items: [] });
 
 
 
   useEffect(() => {
-
-    const fetchData2 = async () => {
+    // Function to fetch data from the names table from the API
+    const fetchNamesData = async () => {
       try {
-        const response2 = await fetch(`http://localhost:5001/api/names/${id}`);
-        if (!response2.ok) {
+        const namesResponse = await fetch(`http://localhost:5001/api/names/${id}`);
+        if (!namesResponse.ok) {
           throw new Error('Network response was not ok.');
         }
-        const jsonData2 = await response2.json();
-        setData2(jsonData2); // Update state with fetched data from API 2
+        const namesJsonData = await namesResponse.json();
+        setNamesData(namesJsonData);
       } catch (error) {
-        console.error('Error fetching data from API 2:', error);
+        console.error('Error fetching names data:', error);
       }
     };
     
 
-    fetchData2();
+    fetchNamesData();
 
-    // Function to fetch data from the API
-    const fetchData1 = async () => {
+    // Function to fetch data from the knownfor table from the API
+    const fetchKnownforData = async () => {
       try {
-        const response1 = await fetch(`http://localhost:5001/api/knownfor/${data2.nameId}`);
-        if (!response1.ok) {
+        const knownforResponse = await fetch(`http://localhost:5001/api/knownfor/nameid/${id}`);
+        if (!knownforResponse.ok) {
           throw new Error('Network response was not ok.');
         }
-        const jsonData1 = await response1.json();
-        setData1(jsonData1); // Update state with fetched data
+        const knownforJsonData = await knownforResponse.json();
+        setKnownforData(knownforJsonData);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching knownfor data:', error);
       }
     };
 
-    fetchData1(); // Call the function when the component mounts    
+    fetchKnownforData();
 
-
-
-        // Function to fetch data from the API
-        const fetchData3 = async () => {
-          try {
-            const response3 = await fetch(`http://localhost:5001/api/knownfor/${id}`);
-            if (!response3.ok) { 
-              throw new Error('Network response was not ok.');
-            }
-            const jsonData3 = await response3.json();
-            setData1(jsonData3); // Update state with fetched data
-          } catch (error) {
-            console.error('Error fetching data:', error);
-          }
-        };
-    
-        fetchData3(); // Call the function when the component mounts  
   }, []);
 
 
   return (
     <>
-    <SiteNavbar/>
-    <h1>{data2.name}</h1>
-    <p>Current rating: {data2.avgNameRating}</p>
-    <RatingScale/>
-    <h2>Movies of {data2.name}</h2>
-    <Stack gap={4}>
-    <Container fluid>
-      <Row>
-  
-      </Row>
-    </Container>
-    </Stack>
+      <SiteNavbar/>
+      <div className="container mt-4">
+      <h1>{namesData.name}</h1>
+      <p style={{ fontSize: '1.2em', color: '#888' }}>Current rating: {namesData.avgNameRating}</p>
+      <div style={{
+          borderBottom: '2px solid #333',
+          width: '100%', 
+          marginTop: '20px',
+          marginBottom: '20px'
+        }}></div>
+      <h2>Involved with</h2>
+      <Stack>
+        <Container fluid>
+          <Row>
+            {knownforData.items.length > 0 ? (
+              <>
+                {knownforData.items.map((x, idx) => (
+                  <MovieWidget key={`movie_${idx}`} idx={idx} titleId={knownforData.items[idx].titleId}/>
+                ))}
+              </>
+            ) : (
+              <p>Loading...</p>
+            )}
+          </Row>
+        </Container>
+      </Stack>
+      <div style={{
+          borderBottom: '2px solid #333',
+          width: '100%', 
+          marginTop: '20px',
+          marginBottom: '20px'
+        }}>
+      </div>
+      <h2>Top 10 {namesData.name} has worked the most with:</h2>
+      {namesData.name ? (
+        <>
+          <CoactorWidget namesData={namesData}/>
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
+      </div>
     </>
   );
 };
