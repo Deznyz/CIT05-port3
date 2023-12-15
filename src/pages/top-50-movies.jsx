@@ -73,17 +73,6 @@ const TopFiftyMovies = () => {
                 )}
               </>
             ))} 
-          <Card.Body>
-            <Card.Title style={{height: '70px', color: 'black' }}>
-              {movieData.primaryTitle ?(
-                <>
-                  {movieData.primaryTitle}
-                </>
-              ): (
-                <p>Loading...</p>
-              )}
-            </Card.Title>
-          </Card.Body>   
       </Row>
     </Container>
     </Stack>  

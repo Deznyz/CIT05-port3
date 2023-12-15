@@ -27,10 +27,7 @@ const TopFiftyActors = () => {
   const [knownforData, setKnownforData] = useState({ items: [] });
   const [frontendData, setFrontendData] = useState({ items: [] });
   const [movieData, setMovieData] = useState({ items: [] });
-  
-  const sortByRating = (a, b) => {
-    return b.avgNameRating - a.avgNameRating;
-  };
+
 
 
   useEffect(() => {
@@ -48,6 +45,23 @@ const TopFiftyActors = () => {
       }
     };
     fetchNamesData();
+
+    // Function to fetch data from the knownfor table from the API
+    const fetchKnownforData = async () => {
+      try {
+        const knownforResponse = await fetch(`http://localhost:5001/api/knownfor/?page=0&pageSize=50`);
+        if (!knownforResponse.ok) {
+          throw new Error('Network response was not ok.');
+        }
+        const knownforJsonData = await knownforResponse.json();
+        setKnownforData(knownforJsonData);
+      } catch (error) {
+        console.error('Error fetching knownfor data:', error);
+      }
+    };
+
+    fetchKnownforData();
+
 
     const fetchFrontendData = async () => {
       try {
@@ -74,15 +88,18 @@ const TopFiftyActors = () => {
 <Container fluid>
           <h1>Top 50 actors</h1>
           <Row>
-          {namesData.length > 0 ? namesData.sort(sortByRating).map((namesData, idx) => (
+            {Array.from({ length: 50 }).map((_, idx) => (
+              namesData.items[idx] ? (
                 <ActorWidget key={`actor_${idx}`} idx={idx} nameId={namesData.items[idx].nameId} />
-              
-            )) : null
+              ) : (
+                <p key={`actor_placeholder_${idx}`}>Loading...</p> // Or display a loading message or placeholder
+              )
+            ))
                }        
           </Row>
         </Container>
       </Stack>
-    </>        
+  </>        
   );
 };
 export default TopFiftyActors;
