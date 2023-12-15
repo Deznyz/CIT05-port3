@@ -25,6 +25,8 @@ import MovieSite from './pages/movie';
 import ActorSite from './pages/actor';
 import SearchResult from './pages/search-result';
 import UserProfile from './pages/user-profile';
+import ActorWidget from './pages/Components/actorwidget';
+import { element } from 'prop-types';
 
 
 const App = () => {
@@ -38,7 +40,7 @@ const App = () => {
         <Route path="/login" element={<Login/>}/>
         <Route path="/create-user" element={<CreateUser/>}/>
         <Route path="/movie/:id" element={<MovieSite/>}/>
-        <Route path="/actor/:id" element={<ActorSite/>}/>
+        <Route path="/actor/:id" element={<ActorSite/>} />
         <Route path="/search-result/:id" element={<SearchResult/>}/>
         <Route path="/user-profile" element={<UserProfile/>}/>
       </Routes>

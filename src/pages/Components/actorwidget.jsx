@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 
 
 const ActorWidget = ({ idx, nameId }) => {
-  const [namesData, setNamesData] = useState({ items: [] });
+  const [namesData, setNamesData] = useState(null);
 
   useEffect(() => {
     // Function to fetch data from the names table from the API
@@ -25,7 +25,7 @@ const ActorWidget = ({ idx, nameId }) => {
     
 
     fetchNamesData();
-  }, [])
+  }, [nameId])
 
 
   if (!namesData) {

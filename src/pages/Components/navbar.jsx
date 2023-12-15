@@ -22,7 +22,7 @@ const SiteNavbar = () => {
     const handleSearch = (e) => {
       e.preventDefault();
       if (searchText.trim() !== '') {
-        navigate(`/search-result/${searchText}`);
+        navigate(`./search-result/${searchText}`);
       }
     };
   

@@ -6,6 +6,7 @@ import Stack from 'react-bootstrap/Stack';
 import Container from 'react-bootstrap/Container';
 import ActorWidget from './Components/actorwidget';
 import { Row } from 'react-bootstrap';
+import Bookmark from './Components/bookmark-button';
 
 
 const Movie = () => {
@@ -89,6 +90,7 @@ const Movie = () => {
   return (
     <>
       <SiteNavbar/>
+      <Bookmark/>
       <div className="container mt-4">
         <div className="row">
           <div className="col-md-4 mb-3"> 
