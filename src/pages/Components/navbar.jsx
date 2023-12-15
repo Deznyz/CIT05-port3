@@ -8,6 +8,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import logo from '../../imdb icon.png'
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
@@ -16,11 +17,31 @@ import Cookies from 'js-cookie';
 const SiteNavbar = () => {
 
   
+    const [searchText, setSearchText] = useState('');
+    const [hasActiveCookie, setCookie] = useState();
+    const navigate = useNavigate();
+    const handleSearch = (e) => {
+      e.preventDefault();
+      if (searchText.trim() !== '') {
+        navigate(`/search-result/${searchText}`);
+      }
+    };
+  
+    const handleInputChange = (e) => {
+      setSearchText(e.target.value);
+    };
+  
+    const handleKeyPress = (e) => {
+      if (e.key === 'Enter') {
+        handleSearch(e);
+      }
+    };
+    
+
   //const hasActiveCookie = Cookies.get('UserId'); // henter cookie her
   //console.log('Value of the cookie:', hasActiveCookie);
 
-  const [hasActiveCookie, setCookie] = useState();
-  const navigate = useNavigate();
+  
 
 
   useEffect(() => {
@@ -37,6 +58,7 @@ const SiteNavbar = () => {
     Cookies.remove('userId'); // sletter cookie efter der er logget ud
     navigate('/');
   };
+
     return (
       <>
         
@@ -54,14 +76,17 @@ const SiteNavbar = () => {
               </Link>
               </Navbar.Brand>
   
-              <Form className="d-flex">
-                    <Form.Control
-                      type="search"
-                      placeholder="Search"
-                      className="me-2"
-                      aria-label="Search"
-                    />
-                  </Form>
+              <Form onSubmit={handleSearch} className="d-flex">
+      <Form.Control
+        type="search"
+        placeholder="Search"
+        className="me-2"
+        aria-label="Search"
+        value={searchText}
+        onChange={handleInputChange}
+        onKeyPress={handleKeyPress}
+      />
+    </Form>
               <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-false`} />
               <Navbar.Offcanvas
                 id={`offcanvasNavbar-expand-false`}

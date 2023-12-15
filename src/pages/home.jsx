@@ -40,7 +40,7 @@ const Home = () => {
       }
     };
 
-    fetchMovieData();  
+    fetchMovieData();
 
     const fetchNamesData = async () => {
       try {

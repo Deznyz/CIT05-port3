@@ -36,7 +36,7 @@ const Actor = () => {
     // Function to fetch data from the knownfor table from the API
     const fetchKnownforData = async () => {
       try {
-        const knownforResponse = await fetch(`http://localhost:5001/api/knownfor/nameid/${id}`);
+        const knownforResponse = await fetch(`http://localhost:5001/api/knownfor/nameid/${id}?page=0&pagesize=1000000`);
         if (!knownforResponse.ok) {
           throw new Error('Network response was not ok.');
         }
