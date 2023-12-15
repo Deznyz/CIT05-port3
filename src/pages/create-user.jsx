@@ -40,7 +40,6 @@ const CreateUser = () => {
         
         // Sætter cookie med userId fra JSON response
         Cookies.set('userId', userData.userId);
-
         navigate('../user-profile');
         
       } else {

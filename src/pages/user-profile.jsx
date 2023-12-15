@@ -23,11 +23,11 @@ import Cookies from 'js-cookie';
 const UserProfile = () => {
     const navigate = useNavigate();
     const [userId, setUserId] = useState(null);
-  
+    
     useEffect(() => {
       // Tjekker om cookie findes med userId
       const userIdCookie = Cookies.get('userId');
-  
+      //console.log('Value of the cookie:', userIdCookie);
       if (userIdCookie) {
         // Cookie findes. sætter userId state
         setUserId(userIdCookie);
@@ -35,7 +35,7 @@ const UserProfile = () => {
         // cookie findes ikke, redirect til forside
         navigate('/');
       }
-    }, [navigate]);
+    }, [navigate]); // todo - skal denne være der?
   
     
     return (
