@@ -13,7 +13,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import SiteNavbar from './Components/navbar';
-import MovieWidget from './Components/moviewidget'
+import MovieWidget from './Components/moviewidget';
 import ActorWidget from './Components/actorwidget';
 import React, { useState, useEffect } from 'react';
 
@@ -80,7 +80,7 @@ const Home = () => {
       <div className="container mt-4">
       <Stack gap={4}>
         <Container fluid>
-          <h1>Selection of movies</h1>
+          <h1>Selection of titles</h1>
           <Row>
             {Array.from({ length: 6 }).map((_, idx) => (
               <>

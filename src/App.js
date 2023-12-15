@@ -24,20 +24,23 @@ import CreateUser from './pages/create-user';
 import MovieSite from './pages/movie';
 import ActorSite from './pages/actor';
 import SearchResult from './pages/search-result';
+import UserProfile from './pages/user-profile';
+
 
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/top-50-movies" element={<TopFiftyMovies/>}/>
-        <Route path="/top-50-actors" element={<TopFiftyActors/>}/>
+        <Route path="/top-50-titles" element={<TopFiftyMovies/>}/>
+        <Route path="/top-50-people" element={<TopFiftyActors/>}/>
         <Route path="/genres" element={<Genres/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/create-user" element={<CreateUser/>}/>
         <Route path="/movie/:id" element={<MovieSite/>}/>
         <Route path="/actor/:id" element={<ActorSite/>}/>
         <Route path="/search-result/:id" element={<SearchResult/>}/>
+        <Route path="/user-profile" element={<UserProfile/>}/>
       </Routes>
     </Router>
   );
