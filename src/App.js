@@ -23,6 +23,7 @@ import Login from './pages/login';
 import CreateUser from './pages/create-user';
 import MovieSite from './pages/movie';
 import ActorSite from './pages/actor';
+import SearchResult from './pages/search-result';
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
         <Route path="/create-user" element={<CreateUser/>}/>
         <Route path="/movie/:id" element={<MovieSite/>}/>
         <Route path="/actor/:id" element={<ActorSite/>}/>
+        <Route path="/search-result/:id" element={<SearchResult/>}/>
       </Routes>
     </Router>
   );

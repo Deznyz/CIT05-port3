@@ -9,10 +9,34 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import logo from '../../imdb icon.png'
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const SiteNavbar = () => {
+
+  
+    const navigate = useNavigate();
+    const [searchText, setSearchText] = useState('');
+  
+    const handleSearch = (e) => {
+      e.preventDefault();
+      if (searchText.trim() !== '') {
+        navigate(`/search-result/${searchText}`);
+      }
+    };
+  
+    const handleInputChange = (e) => {
+      setSearchText(e.target.value);
+    };
+  
+    const handleKeyPress = (e) => {
+      if (e.key === 'Enter') {
+        handleSearch(e);
+      }
+    };
+    
     return (
       <>
         
@@ -30,14 +54,17 @@ const SiteNavbar = () => {
               </Link>
               </Navbar.Brand>
   
-              <Form className="d-flex">
-                    <Form.Control
-                      type="search"
-                      placeholder="Search"
-                      className="me-2"
-                      aria-label="Search"
-                    />
-                  </Form>
+              <Form onSubmit={handleSearch} className="d-flex">
+      <Form.Control
+        type="search"
+        placeholder="Search"
+        className="me-2"
+        aria-label="Search"
+        value={searchText}
+        onChange={handleInputChange}
+        onKeyPress={handleKeyPress}
+      />
+    </Form>
               <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-false`} />
               <Navbar.Offcanvas
                 id={`offcanvasNavbar-expand-false`}
