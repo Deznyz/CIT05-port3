@@ -80,7 +80,7 @@ const Home = () => {
       <div className="container mt-4">
       <Stack gap={4}>
         <Container fluid>
-          <h1>Selection of movies</h1>
+          <h1>Selection of titles</h1>
           <Row>
             {Array.from({ length: 6 }).map((_, idx) => (
               <>

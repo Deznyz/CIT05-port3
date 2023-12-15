@@ -52,12 +52,10 @@ const SiteNavbar = () => {
                 <Offcanvas.Body>
                   <Nav className="justify-content-end flex-grow-1 pe-3">
   
-                    <Nav.Link><Link to="/top-50-movies" style={{ textDecoration: 'none', color: 'black' }}>Top 50 movies</Link></Nav.Link>
+                    <Nav.Link><Link to="/top-50-titles" style={{ textDecoration: 'none', color: 'black' }}>Top 50 titles</Link></Nav.Link>
   
-                    <Nav.Link><Link to="/top-50-actors" style={{ textDecoration: 'none', color: 'black' }}>Top 50 actors</Link></Nav.Link>
-  
-                    <Nav.Link href="genres">genres</Nav.Link>
-  
+                    <Nav.Link><Link to="/top-50-people" style={{ textDecoration: 'none', color: 'black' }}>Top 50 people</Link></Nav.Link>
+
                     <NavDropdown
                       title="User"
                       id={`offcanvasNavbarDropdown-expand-false`}

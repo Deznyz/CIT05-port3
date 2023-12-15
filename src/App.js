@@ -29,8 +29,8 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/top-50-movies" element={<TopFiftyMovies/>}/>
-        <Route path="/top-50-actors" element={<TopFiftyActors/>}/>
+        <Route path="/top-50-titles" element={<TopFiftyMovies/>}/>
+        <Route path="/top-50-people" element={<TopFiftyActors/>}/>
         <Route path="/genres" element={<Genres/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/create-user" element={<CreateUser/>}/>

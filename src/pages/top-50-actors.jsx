@@ -86,7 +86,7 @@ const TopFiftyActors = () => {
 
 <Stack gap={4}>
 <Container fluid>
-          <h1>Top 50 actors</h1>
+          <h1>Top 50 people</h1>
           <Row>
             {Array.from({ length: 50 }).map((_, idx) => (
               namesData.items[idx] ? (

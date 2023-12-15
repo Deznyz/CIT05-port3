@@ -25,7 +25,7 @@ const TopFiftyMovies = () => {
     // Function to fetch data from the API
     const fetchMovieData = async () => {
       try {
-        const movieResponse = await fetch(`http://localhost:5001/api/movietitles/?page=0&pageSize=50`);
+        const movieResponse = await fetch(`http://localhost:5001/api/movieratings/?page=0&pageSize=50`);
         if (!movieResponse.ok) {
           throw new Error('Network response was not ok.');
         }
@@ -60,7 +60,7 @@ const TopFiftyMovies = () => {
     <div className="container mt-4">
     <Stack gap={4}>
       <Container fluid>
-        <h1>Top 50 movies</h1>
+        <h1>Top 50 titles</h1>
         <Row>
       {Array.from({ length: 50 }).map((_, idx) => (
               <>
