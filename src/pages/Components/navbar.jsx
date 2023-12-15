@@ -19,7 +19,7 @@ const SiteNavbar = () => {
   //const hasActiveCookie = Cookies.get('UserId'); // henter cookie her
   //console.log('Value of the cookie:', hasActiveCookie);
 
-  const [cookie, setCookie] = useState();
+  const [hasActiveCookie, setCookie] = useState();
   const navigate = useNavigate();
 
 
@@ -78,7 +78,7 @@ const SiteNavbar = () => {
                 <Nav.Link><Link to="/top-50-titles" style={{ textDecoration: 'none', color: 'black' }}>Top 50 titles</Link></Nav.Link>
                 <Nav.Link><Link to="/top-50-people" style={{ textDecoration: 'none', color: 'black' }}>Top 50 people</Link></Nav.Link>
 
-                {cookie ? ( // cookie
+                {hasActiveCookie ? ( // cookie
                   <>
                     <Nav.Link><Link to="/user-profile" style={{ textDecoration: 'none', color: 'black' }}>User profile</Link></Nav.Link>
                     <Button variant="outline-danger" onClick={handleLogout}>
