@@ -2,28 +2,50 @@ import placeholder from '../../placeholder 305x160.svg';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 
-const ActorWidget = ({ idx, data }) => {
-  const name = data.items[idx+5];
 
-  if (!name) {
+const ActorWidget = ({ idx, nameId }) => {
+  const [namesData, setNamesData] = useState({ items: [] });
+
+  useEffect(() => {
+    // Function to fetch data from the names table from the API
+    const fetchNamesData = async () => {
+      try {
+        const namesResponse = await fetch(`http://localhost:5001/api/names/${nameId}`);
+        if (!namesResponse.ok) {
+          throw new Error('Network response was not ok.');
+        }
+        const namesJsonData = await namesResponse.json();
+        setNamesData(namesJsonData);
+      } catch (error) {
+        console.error('Error fetching names data:', error);
+      }
+    };
+    
+
+    fetchNamesData();
+  }, [])
+
+
+  if (!namesData) {
     return null; // Or display an alternative content/error message
   }
 
   return (
-    <Col>
-      <Link to={`/actor/${name.nameId}`} style={{ textDecoration: 'none' }}>
-            <Card style={{ width: '17rem' }}>
-              <Card.Body>
-                <Card.Title>{name.name}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">Rating:</Card.Subtitle>
-                <Card.Text>
-                  {name.avgNameRating}
-                </Card.Text>
-              </Card.Body>
-            </Card>
-            </Link>
-          </Col>
+    <Col style={{ marginBottom: '20px' }}>
+      <Card style={{ width: '17rem', textDecoration: 'none' }}>
+        <Link to={`/actor/${namesData.nameId}`} style={{ textDecoration: 'none' }}>
+          <Card.Body style={{ color: 'black' }}>
+            {namesData.name ? (
+              <Card.Title>{namesData.name}</Card.Title>
+            ) : (
+              <Card.Title>PLACEHOLDER {idx+1}</Card.Title>                )}
+              <Card.Subtitle className="mb-2 text-muted">Rating: {namesData.avgNameRating}</Card.Subtitle>
+          </Card.Body>
+        </Link>
+      </Card>        
+    </Col>
   );
 };
 

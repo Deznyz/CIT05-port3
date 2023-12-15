@@ -13,82 +13,109 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import SiteNavbar from './Components/navbar';
-import MovieWidget from './Components/moviewidget'
+import MovieWidget from './Components/moviewidget';
 import ActorWidget from './Components/actorwidget';
 import React, { useState, useEffect } from 'react';
 
 
 
 const Home = () => {
-  const [data1, setData1] = useState({ items: [] });
-  const [data2, setData2] = useState({ items: [] });
+  const [movieData, setMovieData] = useState({ items: [] });
+  const [namesData, setNamesData] = useState({ items: [] });
+  const [frontendData, setFrontendData] = useState({ items: [] });
 
 
   useEffect(() => {
     // Function to fetch data from the API
-    const fetchData1 = async () => {
+    const fetchMovieData = async () => {
       try {
-        const response1 = await fetch("http://localhost:5001/api/movietitles");
-        if (!response1.ok) {
+        const movieResponse = await fetch("http://localhost:5001/api/movietitles");
+        if (!movieResponse.ok) {
           throw new Error('Network response was not ok.');
         }
-        const jsonData1 = await response1.json();
-        setData1(jsonData1); // Update state with fetched data
+        const movieJsonData = await movieResponse.json();
+        setMovieData(movieJsonData); // Update state with fetched data
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
-    fetchData1(); // Call the function when the component mounts    
+    fetchMovieData();  
 
-    const fetchData2 = async () => {
+    const fetchNamesData = async () => {
       try {
-        const response2 = await fetch('http://localhost:5001/api/names');
-        if (!response2.ok) {
+        const namesResponse = await fetch('http://localhost:5001/api/names');
+        if (!namesResponse.ok) {
           throw new Error('Network response was not ok.');
         }
-        const jsonData2 = await response2.json();
-        setData2(jsonData2); // Update state with fetched data from API 2
+        const namesJsonData = await namesResponse.json();
+        setNamesData(namesJsonData); // Update state with fetched data from API 2
       } catch (error) {
         console.error('Error fetching data from API 2:', error);
       }
     };
 
-    fetchData2();
+    fetchNamesData();
+
+    const fetchFrontendData = async () => {
+      try {
+        const frontendResponse = await fetch(`http://localhost:5001/api/frontend/`);
+        if (!frontendResponse.ok) {
+          throw new Error('Network response was not ok.');
+        }
+        const frontendJsonData = await frontendResponse.json();
+        setFrontendData(frontendJsonData); // Update state with fetched data
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchFrontendData();
 
   }, []);
-
-
-
-
-  //names api call
   
   return (
     <>
-      
-        <SiteNavbar/>
-
-  <Stack gap={4}>
-    <Container fluid>
-      <Row>
-        {Array.from({ length: 4 }).map((_, idx) => (
-          <MovieWidget key={`movie_${idx}`} idx={idx} data={data1}/>
-        ))}   
-      </Row>
-    </Container>
-
-
-
-
-
-    <Container fluid>
-      <Row>
-        {Array.from({ length: 4 }).map((_, idx) => (
-          <ActorWidget idx={idx} data={data2}/>
-        ))}   
-      </Row>
-    </Container>
-  </Stack>
+      <SiteNavbar/>
+      <div className="container mt-4">
+      <Stack gap={4}>
+        <Container fluid>
+          <h1>Selection of movies</h1>
+          <Row>
+            {Array.from({ length: 6 }).map((_, idx) => (
+              <>
+                {movieData.items.length > 0 ? (
+                  <>
+                    <MovieWidget key={`movie_${idx}`} idx={idx} titleId={movieData.items[idx].titleId}/>
+                  </>
+                ) : (
+                  <p>Loading...</p>
+                )}
+              </>
+            ))}   
+          </Row>
+        </Container>
+        <div style={{
+          borderBottom: '2px solid #333',
+          width: '100%', 
+          marginTop: '20px',
+          marginBottom: '20px'
+        }}>
+      </div>
+        <Container fluid>
+          <h1>Selection of people</h1>
+          <Row>
+            {Array.from({ length: 6 }).map((_, idx) => (
+              namesData.items[idx] ? (
+                <ActorWidget key={`actor_${idx}`} idx={idx} nameId={namesData.items[idx].nameId} />
+              ) : (
+                <p key={`actor_placeholder_${idx}`}>Loading...</p> // Or display a loading message or placeholder
+              )
+            ))}
+          </Row>
+        </Container>
+      </Stack>
+      </div>
     </>        
   );
 };

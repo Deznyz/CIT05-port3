@@ -52,9 +52,9 @@ const SiteNavbar = () => {
                 <Offcanvas.Body>
                   <Nav className="justify-content-end flex-grow-1 pe-3">
   
-                    <Nav.Link href="top-50-movies">Top 50 movies</Nav.Link>
+                    <Nav.Link><Link to="/top-50-movies" style={{ textDecoration: 'none', color: 'black' }}>Top 50 movies</Link></Nav.Link>
   
-                    <Nav.Link href="top-50-actors">Top 50 actors</Nav.Link>
+                    <Nav.Link><Link to="/top-50-actors" style={{ textDecoration: 'none', color: 'black' }}>Top 50 actors</Link></Nav.Link>
   
                     <Nav.Link href="genres">genres</Nav.Link>
   

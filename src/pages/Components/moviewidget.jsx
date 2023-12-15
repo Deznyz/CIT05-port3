@@ -1,24 +1,86 @@
-import placeholder from '../../placeholder 305x160.svg';
+import React, { useState, useEffect } from 'react';
+import placeholder from '../../movie_placeholder.jpg';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
 
-const MovieWidget = ({ idx, data }) => {
-  const movie = data.items[idx];
+const MovieWidget = ({ idx, titleId}) => {
 
-  if (!movie) {
+  const [movieData, setMovieData] = useState({ items: [] });
+  const [frontendData, setFrontendData] = useState({ items: [] });
+
+
+  useEffect(() => {
+    // Function to fetch data from the API
+    const fetchMovieData = async () => {
+      try {
+        const movieResponse = await fetch(`http://localhost:5001/api/movietitles/${titleId}`);
+        if (!movieResponse.ok) {
+          throw new Error('Network response was not ok.');
+        }
+        const movieJsonData = await movieResponse.json();
+        setMovieData(movieJsonData); // Update state with fetched data
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchMovieData();
+
+    const fetchFrontendData = async () => {
+      try {
+        const frontendResponse = await fetch(`http://localhost:5001/api/frontend/${titleId}`);
+        if (!frontendResponse.ok) {
+          throw new Error('Network response was not ok.');
+        }
+        const frontendJsonData = await frontendResponse.json();
+        setFrontendData(frontendJsonData); // Update state with fetched data
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchFrontendData();
+
+  }, []);
+
+  if (!titleId) {
     return null; // Or display an alternative content/error message
   }
   return (
-    <Col>
-      <Link to={`/movie/${movie.titleId}`} style={{ textDecoration: 'none' }}>
-        <Card key={idx} style={{ width: '17rem' }}>
-          <Card.Img variant="top" src={placeholder} />
+    <Col style={{ marginBottom: '20px' }}>
+      <Card key={idx} style={{ width: '17rem' }}>
+        <Link to={`/movie/${movieData.titleId}`} style={{ textDecoration: 'none' }}>
+          {frontendData.items.length > 0 && frontendData.items[0].poster ? (
+              <Card.Img
+               src={frontendData.items[0].poster}
+               alt="Movie Poster"
+               className="img-fluid"
+               style={{ width: '300px', height: '300px' }}
+              />
+              ) : (
+              <Card.Img
+                src={placeholder}
+                alt="Placeholder"
+                className="img-fluid"
+                style={{ width: '300px', height: '300px' }}
+              />
+            )}
           <Card.Body>
-            <Card.Title>{movie.primaryTitle}</Card.Title>
+            <Card.Title style={{height: '70px', color: 'black' }}>
+              {movieData.primaryTitle ?(
+                <>
+                  {movieData.primaryTitle}
+                </>
+              ):(
+                <p>
+                  Unknown title
+                </p>
+              )}
+            </Card.Title>
           </Card.Body>
-        </Card>
-      </Link>
+        </Link>
+      </Card>
     </Col>
   );
 };
