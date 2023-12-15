@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Form, Button, Col } from 'react-bootstrap';
 import SiteNavbar from './Components/navbar';
 import Cookies from 'js-cookie';
-//import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const CreateUser = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleCreateUser = async (e) => {
     e.preventDefault();
@@ -36,8 +36,13 @@ const CreateUser = () => {
       });
 
       if (response.ok){
-        // indsætter noget logik her, der siger at auth er ok. henvis til dashboard eller lignende
-        history.push('/user-profile');
+        const userData = await response.json();
+        
+        // Sætter cookie med userId fra JSON response
+        Cookies.set('userId', userData.userId);
+
+        navigate('../user-profile');
+        
       } else {
         const errorData = await response.json();
         alert(`Fejlbesked: ${errorData.message}`);
