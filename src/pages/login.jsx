@@ -1,20 +1,63 @@
 import React, { useState } from 'react';
 import { Form, Button, Col } from 'react-bootstrap';
 import SiteNavbar from './Components/navbar';
-
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = (e) => {
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Perform login logic here (validate username and password, make API call, etc.)
-    console.log('Username:', username);
-    console.log('Password:', password);
-    // Reset the form
+
+    // Validerer brugernavn og adgangskode
+    if(!username || !password){
+      alert('Brugernavn og adgangskode er påkrævet');
+      return;
+    }
+
     setUsername('');
     setPassword('');
+
+    try{
+      const response = await fetch('http://Localhost:5001/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type':'application/json'
+        },
+        body: JSON.stringify({username, password}),
+      });
+
+      if (response.ok) {
+
+        const userData = await response.json();
+  
+          // Vi laver et objekt, der indeholder både userId og username
+          const userObject = {
+            userId: userData.userId,
+            username: userData.username,
+          };
+  
+          // Serializer objektet som JSON og sætter det som en enkelt cookie
+          Cookies.set('user', JSON.stringify(userObject), { expires: 1 / 96 }); // 1/96 svarer til 15 minutter i dage
+  
+          navigate('../user-profile');
+
+        } else if (response.status === 404) {
+          // håndterer hvis der kommer en "HTTP 404 Not Found"
+          alert('Brugeren blev ikke fundet');
+        } else {
+          // Handle other server-side errors
+          alert('Fejl i login oplysninger');
+        }
+    } catch (error) {
+      console.error('Fejlbesked:', error);
+      alert(`Der skete en fejl i forsøget på at logge ind. Fejlbesked: ${error.message}`);
+    }
+
   };
 
   return (

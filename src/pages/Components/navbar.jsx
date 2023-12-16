@@ -13,7 +13,7 @@ import Cookies from 'js-cookie';
 
 const SiteNavbar = () => {
   const [searchText, setSearchText] = useState('');
-  const [hasActiveCookie, setCookie] = useState();
+  const [userCookie, setUserCookie] = useState(null);
   const navigate = useNavigate();
 
   const handleSearch = (e) => {
@@ -34,13 +34,19 @@ const SiteNavbar = () => {
   };
 
   useEffect(() => {
-    const userIdCookie = Cookies.get('userId');
-    console.log('Value of the cookie:', userIdCookie);
-    setCookie(userIdCookie);
+    // Tjekker om user cookie findes
+    const userCookieData = Cookies.get('user');
+
+    if (userCookieData) {
+      // Parse the JSON data from the cookie and store it
+      const parsedUserCookie = JSON.parse(userCookieData);
+      setUserCookie(parsedUserCookie);
+    }
   }, []);
 
   const handleLogout = () => {
-    Cookies.remove('userId');
+    // Fjerner user cookie
+    Cookies.remove('user');
     navigate('/');
   };
 
@@ -58,7 +64,7 @@ const SiteNavbar = () => {
 
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ms-auto">
-              {hasActiveCookie ? (
+              {userCookie ? (
                 <>
                   <Nav.Link>
                     <Link to="/user-profile" style={{ textDecoration: 'none', color: 'black' }}>
