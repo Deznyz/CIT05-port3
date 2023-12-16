@@ -23,14 +23,17 @@ import Cookies from 'js-cookie';
 const UserProfile = () => {
     const navigate = useNavigate();
     const [userId, setUserId] = useState(null);
+    const [username, setUsername] = useState(null);
     
     useEffect(() => {
       // Tjekker om cookie findes med userId
       const userIdCookie = Cookies.get('userId');
-      //console.log('Value of the cookie:', userIdCookie);
+      const usernameCookie = Cookies.get('username');
+      
       if (userIdCookie) {
         // Cookie findes. sætter userId state
         setUserId(userIdCookie);
+        setUsername(usernameCookie);
       } else {
         // cookie findes ikke, redirect til forside
         navigate('/');
@@ -46,7 +49,7 @@ const UserProfile = () => {
           // hvis cookie findes
           <>
             <h1>User Profile Page</h1>
-            <p>Welcome, User {userId}!</p>
+            <p>Welcome, {username}!</p>
             
           </>
         ) : (

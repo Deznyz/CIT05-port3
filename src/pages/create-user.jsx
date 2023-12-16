@@ -18,13 +18,9 @@ const CreateUser = () => {
       alert('Brugernavn og adgangskode er påkrævet');
       return;
     }
-
-    console.log('Username:', username);
-    console.log('Password:', password);
     
     setUsername('');
     setPassword('');
-
 
     try{
       const response = await fetch('http://Localhost:5001/api/users', {
@@ -40,6 +36,7 @@ const CreateUser = () => {
         
         // Sætter cookie med userId fra JSON response
         Cookies.set('userId', userData.userId);
+        Cookies.set('username', userData.username);
         navigate('../user-profile');
         
       } else {
