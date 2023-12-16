@@ -1,26 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
+import React, { useState } from 'react';
+import CookieContent from './cookiecontent';
 
 const Bookmark = () => {
   const [isBookmarked, setIsBookmarked] = useState(false);
-  const [userData, setUserData] = useState(null);
-
-  useEffect(() =>{
-    const userCookie = Cookies.get('user');
-
-    const parsedUserData = JSON.parse(userCookie);
-    setUserData(parsedUserData);
-    
-  },[]);
-
 
   const toggleBookmark = () => {
     setIsBookmarked(!isBookmarked);
   };
 
   return (
-    userData && (
-        
+    <CookieContent>
+      {(userData) => (
         <button
           onClick={toggleBookmark}
           style={{
@@ -35,10 +25,9 @@ const Bookmark = () => {
         >
           {isBookmarked ? 'Bookmarked' : 'Bookmark'}
         </button>
-      )
-    
+      )}
+    </CookieContent>
   );
-  
 };
 
 export default Bookmark;
