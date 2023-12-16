@@ -22,34 +22,32 @@ import Cookies from 'js-cookie';
 
 const UserProfile = () => {
     const navigate = useNavigate();
-    const [userId, setUserId] = useState(null);
-    const [username, setUsername] = useState(null);
+    const [userData, setUserData] = useState(null);
     
     useEffect(() => {
-      // Tjekker om cookie findes med userId
-      const userIdCookie = Cookies.get('userId');
-      const usernameCookie = Cookies.get('username');
+      // Tjekker om user cookie findes
+      const userCookie = Cookies.get('user');
       
-      if (userIdCookie) {
-        // Cookie findes. sætter userId state
-        setUserId(userIdCookie);
-        setUsername(usernameCookie);
+      if (userCookie) {
+        // Cookie findes. Parser JSON data fra cookie
+        const parsedUserData = JSON.parse(userCookie);
+        setUserData(parsedUserData);
       } else {
         // cookie findes ikke, redirect til forside
         navigate('/');
       }
-    }, [navigate]); // todo - skal denne være der?
+    }, [navigate]);
   
     
     return (
         
       <div>
         <SiteNavbar />
-        {userId ? (
+        {userData ? (
           // hvis cookie findes
           <>
             <h1>User Profile Page</h1>
-            <p>Welcome, {username}!</p>
+            <p>Welcome, {userData.username}!</p>
             
           </>
         ) : (
