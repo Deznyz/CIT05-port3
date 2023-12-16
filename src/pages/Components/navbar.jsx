@@ -19,10 +19,12 @@ const SiteNavbar = () => {
     const [searchText, setSearchText] = useState('');
     const [hasActiveCookie, setCookie] = useState();
     const navigate = useNavigate();
+    
+    
     const handleSearch = (e) => {
       e.preventDefault();
       if (searchText.trim() !== '') {
-        navigate(`./search-result/${searchText}`);
+        navigate(`../search-result/${searchText}`);
       }
     };
   
@@ -114,12 +116,12 @@ const SiteNavbar = () => {
                     title="User"
                     id={`offcanvasNavbarDropdown-expand-false`}
                   >
-                    <NavDropdown.Item href="login">
-                      Login
+                    <NavDropdown.Item>
+                      <Link to="/login" style={{ textDecoration: 'none', color: 'black' }}>Login</Link>
                     </NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="create-user">
-                      Create user
+                    <NavDropdown.Item>
+                      <Link to="/create-user" style={{ textDecoration: 'none', color: 'black' }}>Create user</Link>
                     </NavDropdown.Item>
                   </NavDropdown>
                 )}
