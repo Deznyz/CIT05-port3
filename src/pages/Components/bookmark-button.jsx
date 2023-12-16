@@ -3,12 +3,13 @@ import Cookies from 'js-cookie';
 
 const Bookmark = () => {
   const [isBookmarked, setIsBookmarked] = useState(false);
-  const [activeCookie, setActiveCookie] = useState();
+  const [userData, setUserData] = useState(null);
 
   useEffect(() =>{
-    const userIdCookie = Cookies.get('userId');
-    console.log("userIdCookie:" + userIdCookie);
-    setActiveCookie(userIdCookie);
+    const userCookie = Cookies.get('user');
+
+    const parsedUserData = JSON.parse(userCookie);
+    setUserData(parsedUserData);
     
   },[]);
 
@@ -18,7 +19,7 @@ const Bookmark = () => {
   };
 
   return (
-    activeCookie && (
+    userData && (
         
         <button
           onClick={toggleBookmark}
