@@ -5,16 +5,17 @@ import Cookies from 'js-cookie';
 
 
 
-const Bookmark = () => {
+const Bookmark = ({type}) => {
   const {id} = useParams();
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [userData, setUserData] = useState(null);
 
+
   const toggleBookmark = () => {
     if(!isBookmarked){
-        postBookmarksTitle();
+      postBookmarksTitle();
     }else if(isBookmarked){
-
+      deleteBookmarksTitle();
     }
     setIsBookmarked(!isBookmarked);
     
@@ -34,7 +35,7 @@ const Bookmark = () => {
     const fetchBookmarkTitleData = async () => {
       try {
         if (userData && userData.userId) { // Check if userData and userId exist
-          const movieResponse = await fetch(`http://localhost:5001/api/bookmarkstitle/${userData.userId}/${id}`);
+          const movieResponse = await fetch(`http://localhost:5001/api/${type}/${userData.userId}/${id}`);
           if (!movieResponse.ok) {
             throw new Error('Network response was not ok.');
           }
@@ -60,29 +61,30 @@ const Bookmark = () => {
     }
     
     const userId = userData.userId;
-    const titleId = id;
+
 
     try{
-      const response = await fetch('http://localhost:5001/api/bookmarkstitle', {
+      if(type=="bookmarkstitle"){
+      const response = await fetch(`http://localhost:5001/api/bookmarkstitle`, {
         method: 'POST',
         headers: {
           'Content-Type':'application/json'
         },
         body: JSON.stringify({
             UserId : userId, 
-            TitleId: titleId}),
+            TitleId: id}),
       });
-
-      if (response.ok) {
-
-        const bookmarkData = await response.json();
-  
-          // Vi laver et objekt, der indeholder både userId og titleId
-          const bookmarkObject = {
-            userId: userId,
-            titleId: titleId,
-          };
-        }
+    }else if(type=="bookmarksname"){
+      const response = await fetch(`http://localhost:5001/api/bookmarksname`, {
+        method: 'POST',
+        headers: {
+          'Content-Type':'application/json'
+        },
+        body: JSON.stringify({
+            UserId : userId, 
+            NameId: id}),
+      });
+    }
     } catch (error) {
       console.error('Fejlbesked:', error);
       alert(`Der skete en fejl i forsøget på at sætte bookmark. Fejlbesked: ${error.message}`);
@@ -90,6 +92,42 @@ const Bookmark = () => {
 
   };
 
+  //delete function
+  const deleteBookmarksTitle = async () => {
+    if (!userData.userId) {
+      return;
+    }
+  
+    const userId = userData.userId;
+  
+    try {
+      if(type =="bookmarkstitle"){
+      const response = await fetch(`http://localhost:5001/api/bookmarkstitle/`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          UserId : userId, 
+          TitleId: id}),
+      });
+    }else if(type=="bookmarksname"){
+      const response = await fetch(`http://localhost:5001/api/bookmarksname`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          UserId : userId, 
+          NameId: id}),
+      });
+    }
+    } catch (error) {
+      console.error('Error:', error);
+      alert(`Der skete en fejl i forsøget på at slette bookmark. Fejlbesked: ${error.message}`);
+    }
+  };
+  
 
 
   return (
