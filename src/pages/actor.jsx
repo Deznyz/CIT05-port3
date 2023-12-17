@@ -6,6 +6,7 @@ import { Stack, Container, Row } from 'react-bootstrap';
 import RatingScale from './Components/ratingscale';
 import CoactorWidget from './Components/coactorwidget';
 import ActorWidget from './Components/actorwidget';
+import Bookmark from './Components/bookmark-button';
 
 const Actor = () => {
   const { id } = useParams();
@@ -56,6 +57,7 @@ const Actor = () => {
     <>
       <SiteNavbar/>
       <div className="container mt-4">
+      <Bookmark type={"bookmarksname"}/>
       <h1>{namesData.name}</h1>
       <p style={{ fontSize: '1.2em', color: '#888' }}>Current rating: {namesData.avgNameRating}</p>
       <div style={{

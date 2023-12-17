@@ -92,9 +92,8 @@ const Movie = () => {
     <>
       <SiteNavbar/>
       <div className="container mt-4">
-      <Bookmark/>
-      
-        <div className="row">
+      <Bookmark type={"bookmarkstitle"}/>
+    <div className="row">
           <div className="col-md-4 mb-3"> 
             {frontendData.items.length > 0 && frontendData.items[0].poster ? (
               <img
