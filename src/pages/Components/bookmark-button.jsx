@@ -8,6 +8,13 @@ const Bookmark = () => {
     setIsBookmarked(!isBookmarked);
   };
 
+// to lmabda funciton post and delete bookmarks
+
+// toggle on = psot
+// toggle off = delete
+
+// Hent titleId fra URL
+
   return (
     <CookieContent>
       {(userData) => (

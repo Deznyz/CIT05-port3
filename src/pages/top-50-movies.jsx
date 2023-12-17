@@ -15,9 +15,10 @@ import Stack from 'react-bootstrap/Stack';
 import SiteNavbar from './Components/navbar';
 import MovieWidget from './Components/moviewidget';
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const TopFiftyMovies = () => {
+  const {id} = useParams();
   const [movieData, setMovieData] = useState({ items: [] });
   const [frontendData, setFrontendData] = useState({ items: [] });
 
@@ -25,7 +26,7 @@ const TopFiftyMovies = () => {
     // Function to fetch data from the API
     const fetchMovieData = async () => {
       try {
-        const movieResponse = await fetch(`http://localhost:5001/api/movieratings/?page=0&pageSize=50`);
+        const movieResponse = await fetch(`http://localhost:5001/api/movieratings?${id}&pagesize=10`);
         if (!movieResponse.ok) {
           throw new Error('Network response was not ok.');
         }
@@ -39,7 +40,7 @@ const TopFiftyMovies = () => {
 
     const fetchFrontendData = async () => {
       try {
-        const frontendResponse = await fetch(`http://localhost:5001/api/frontend/?page=0&pageSize=50`);
+        const frontendResponse = await fetch(`http://localhost:5001/api/frontend?${id}&pagesize=10`);
         if (!frontendResponse.ok) {
           throw new Error('Network response was not ok.');
         }
@@ -62,7 +63,7 @@ const TopFiftyMovies = () => {
       <Container fluid>
         <h1>Top 50 titles</h1>
         <Row>
-      {Array.from({ length: 50 }).map((_, idx) => (
+      {movieData.items.map((_, idx) => (
               <>
                 {movieData.items.length > 0 ? (
                   <>
