@@ -34,7 +34,7 @@ const TopFiftyMovies = () => {
           throw new Error('Network response was not ok.');
         }
         const frontendJsonData = await frontendResponse.json();
-        setFrontendData(frontendJsonData); // Update state with fetched data
+        setFrontendData(frontendJsonData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
