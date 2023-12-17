@@ -4,7 +4,6 @@ function FetchMovieTitles({url}) {
   const [data, setData] = useState({ items: [] });
 
   useEffect(() => {
-    // Function to fetch data from the API
     const fetchData = async () => {
       try {
         const response = await fetch({url});
@@ -12,14 +11,14 @@ function FetchMovieTitles({url}) {
           throw new Error('Network response was not ok.');
         }
         const jsonData = await response.json();
-        setData(jsonData); // Update state with fetched data
+        setData(jsonData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
-    fetchData(); // Call the function when the component mounts    
-  }, []); // Empty dependency array to run effect only once
+    fetchData();  
+  }, []);
 }
 
 export default FetchMovieTitles;

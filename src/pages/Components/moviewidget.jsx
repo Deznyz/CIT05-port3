@@ -11,7 +11,6 @@ const MovieWidget = ({ idx, titleId}) => {
 
 
   useEffect(() => {
-    // Function to fetch data from the API
     const fetchMovieData = async () => {
       try {
         const movieResponse = await fetch(`http://localhost:5001/api/movietitles/${titleId}`);
@@ -19,7 +18,7 @@ const MovieWidget = ({ idx, titleId}) => {
           throw new Error('Network response was not ok.');
         }
         const movieJsonData = await movieResponse.json();
-        setMovieData(movieJsonData); // Update state with fetched data
+        setMovieData(movieJsonData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -34,7 +33,7 @@ const MovieWidget = ({ idx, titleId}) => {
           throw new Error('Network response was not ok.');
         }
         const frontendJsonData = await frontendResponse.json();
-        setFrontendData(frontendJsonData); // Update state with fetched data
+        setFrontendData(frontendJsonData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -45,7 +44,7 @@ const MovieWidget = ({ idx, titleId}) => {
   }, []);
 
   if (!titleId) {
-    return null; // Or display an alternative content/error message
+    return null;
   }
   return (
     <Col style={{ marginBottom: '20px' }}>

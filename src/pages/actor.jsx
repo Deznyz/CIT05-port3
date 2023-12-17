@@ -3,9 +3,7 @@ import { useParams } from 'react-router-dom';
 import SiteNavbar from './Components/navbar';
 import MovieWidget from './Components/moviewidget';
 import { Stack, Container, Row } from 'react-bootstrap';
-import RatingScale from './Components/ratingscale';
 import CoactorWidget from './Components/coactorwidget';
-import ActorWidget from './Components/actorwidget';
 import Bookmark from './Components/bookmark-button';
 
 const Actor = () => {
@@ -17,7 +15,6 @@ const Actor = () => {
 
 
   useEffect(() => {
-    // Function to fetch data from the names table from the API
     const fetchNamesData = async () => {
       try {
         const namesResponse = await fetch(`http://localhost:5001/api/names/${id}`);
@@ -33,8 +30,6 @@ const Actor = () => {
     
 
     fetchNamesData();
-
-    // Function to fetch data from the knownfor table from the API
     const fetchKnownforData = async () => {
       try {
         const knownforResponse = await fetch(`http://localhost:5001/api/knownfor/nameid/${id}?page=0&pagesize=1000000`);

@@ -1,16 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Offcanvas from 'react-bootstrap/Offcanvas';
-import logo from '../imdb icon.png'
-import placeholder from '../placeholder 305x160.svg'
-import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import SiteNavbar from './Components/navbar';
 import MovieWidget from './Components/moviewidget';
@@ -23,7 +13,6 @@ const TopFiftyMovies = () => {
   const [frontendData, setFrontendData] = useState({ items: [] });
 
   useEffect(() => {
-    // Function to fetch data from the API
     const fetchMovieData = async () => {
       try {
         const movieResponse = await fetch(`http://localhost:5001/api/movieratings?${id}&pagesize=10`);
@@ -31,7 +20,7 @@ const TopFiftyMovies = () => {
           throw new Error('Network response was not ok.');
         }
         const movieJsonData = await movieResponse.json();
-        setMovieData(movieJsonData); // Update state with fetched data
+        setMovieData(movieJsonData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }

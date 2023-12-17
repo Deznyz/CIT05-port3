@@ -17,7 +17,6 @@ const RatingScale = () => {
       const parsedUserData = JSON.parse(userCookie);
       setUserData(parsedUserData);
     } else {
-      // There is no user cookie
       console.log('There is no user cookie');
     }
   }, []);

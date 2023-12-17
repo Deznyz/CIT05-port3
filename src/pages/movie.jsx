@@ -20,7 +20,6 @@ const Movie = () => {
 
 
   useEffect(() => {
-    // Function to fetch data from the API
     const fetchMovieData = async () => {
       try {
         const movieResponse = await fetch(`http://localhost:5001/api/movietitles/${id}`);
@@ -28,16 +27,13 @@ const Movie = () => {
           throw new Error('Network response was not ok.');
         }
         const movieJsonData = await movieResponse.json();
-        setMovieData(movieJsonData); // Update state with fetched data
+        setMovieData(movieJsonData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
-    fetchMovieData(); // Call the function when the component mounts  
-    
-    
-        // Function to fetch data from the API
+    fetchMovieData(); 
         const fetchFrontendData = async () => {
           try {
             const frontendResponse = await fetch(`http://localhost:5001/api/frontend/${id}`);
@@ -45,7 +41,7 @@ const Movie = () => {
               throw new Error('Network response was not ok.');
             }
             const frontendJsonData = await frontendResponse.json();
-            setFrontendData(frontendJsonData); // Update state with fetched data
+            setFrontendData(frontendJsonData);
           } catch (error) {
             console.error('Error fetching data:', error);
           }
@@ -53,8 +49,6 @@ const Movie = () => {
         
         fetchFrontendData();
 
-
-                // Function to fetch data from the API
         const fetchMovieratingData = async () => {
           try {
             const movieratingResponse = await fetch(`http://localhost:5001/api/movieratings/${id}`);
@@ -62,7 +56,7 @@ const Movie = () => {
               throw new Error('Network response was not ok.');
             }
             const movieratingJsonData = await movieratingResponse.json();
-            setMovieratingData(movieratingJsonData); // Update state with fetched data
+            setMovieratingData(movieratingJsonData);
           } catch (error) {
             console.error('Error fetching data:', error);
           }
@@ -77,17 +71,15 @@ const Movie = () => {
               throw new Error('Network response was not ok.');
             }
             const knownforJsonData = await knownforResponse.json();
-            setKnownforData(knownforJsonData); // Update state with fetched data
+            setKnownforData(knownforJsonData);
           } catch (error) {
             console.error('Error fetching data:', error);
           }
         };
     
         fetchKnownforData();
-  }, []); // Empty dependency array to run effect only once
+  }, []);
 
-
-  // Render the details
   return (
     <>
       <SiteNavbar/>

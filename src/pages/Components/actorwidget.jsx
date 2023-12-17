@@ -1,4 +1,3 @@
-import placeholder from '../../placeholder 305x160.svg';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
@@ -9,7 +8,6 @@ const ActorWidget = ({ idx, nameId }) => {
   const [namesData, setNamesData] = useState(null);
 
   useEffect(() => {
-    // Function to fetch data from the names table from the API
     const fetchNamesData = async () => {
       try {
         const namesResponse = await fetch(`http://localhost:5001/api/names/${nameId}`);
@@ -29,7 +27,7 @@ const ActorWidget = ({ idx, nameId }) => {
 
 
   if (!namesData) {
-    return null; // Or display an alternative content/error message
+    return null;
   }
 
   return (

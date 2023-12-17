@@ -1,18 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Offcanvas from 'react-bootstrap/Offcanvas';
-import logo from '../imdb icon.png'
-import placeholder from '../placeholder 305x160.svg'
-import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Stack from 'react-bootstrap/Stack';
 import SiteNavbar from './Components/navbar';
 import ActorWidget from './Components/actorwidget';
 import MovieWidget from './Components/moviewidget';
@@ -29,7 +19,6 @@ const SearchResult = () => {
     const [namesSearchData, setNamesSearchData] = useState({ items: [] });  
   
     useEffect(() => {
-      // Function to fetch data from the API
       const fetchMovieSearchData = async () => {
         try {
           const movieSearchResponse = await fetch(`http://localhost:5001/api/search/${id}?page=0&pagesize=10`);
@@ -37,7 +26,7 @@ const SearchResult = () => {
             throw new Error('Network response was not ok.');
           }
           const movieSearchJsonData = await movieSearchResponse.json();
-          setMovieSearchData(movieSearchJsonData); // Update state with fetched data
+          setMovieSearchData(movieSearchJsonData);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -52,7 +41,7 @@ const SearchResult = () => {
             throw new Error('Network response was not ok.');
           }
           const namesSearchJsonData = await namesSearchResponse.json();
-          setNamesSearchData(namesSearchJsonData); // Update state with fetched data from API 2
+          setNamesSearchData(namesSearchJsonData);
         } catch (error) {
           console.error('Error fetching data from API 2:', error);
         }
