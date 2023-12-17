@@ -90,7 +90,7 @@ const Bookmark = () => {
 
   };
 
-  //delete function
+
 
   return (
     <CookieContent>
