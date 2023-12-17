@@ -34,7 +34,7 @@ const TopFiftyActors = () => {
     // Function to fetch data from the names table from the API
     const fetchNamesData = async () => {
       try {
-        const namesResponse = await fetch('http://localhost:5001/api/names/?page=0&pageSize=50');
+        const namesResponse = await fetch(`http://localhost:5001/api/names/?${id}&pagesize=10`);
         if (!namesResponse.ok) {
           throw new Error('Network response was not ok.');
         }
@@ -49,7 +49,7 @@ const TopFiftyActors = () => {
     // Function to fetch data from the knownfor table from the API
     const fetchKnownforData = async () => {
       try {
-        const knownforResponse = await fetch(`http://localhost:5001/api/knownfor/?page=0&pageSize=50`);
+        const knownforResponse = await fetch(`http://localhost:5001/api/knownfor/?${id}&pagesize=10`);
         if (!knownforResponse.ok) {
           throw new Error('Network response was not ok.');
         }
@@ -65,7 +65,7 @@ const TopFiftyActors = () => {
 
     const fetchFrontendData = async () => {
       try {
-        const frontendResponse = await fetch(`http://localhost:5001/api/frontend/?page=0&pageSize=50`);
+        const frontendResponse = await fetch(`http://localhost:5001/api/frontend/?${id}&pagesize=10`);
         if (!frontendResponse.ok) {
           throw new Error('Network response was not ok.');
         }
@@ -88,7 +88,7 @@ const TopFiftyActors = () => {
 <Container fluid>
           <h1>Top 50 people</h1>
           <Row>
-            {Array.from({ length: 50 }).map((_, idx) => (
+            {Array.from({ length: 10 }).map((_, idx) => (
               namesData.items[idx] ? (
                 <ActorWidget key={`actor_${idx}`} idx={idx} nameId={namesData.items[idx].nameId} />
               ) : (
@@ -99,6 +99,21 @@ const TopFiftyActors = () => {
           </Row>
         </Container>
       </Stack>
+      <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-end">
+        <li class="page-item disabled">
+          <a class="page-link">Previous</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="http://localhost:3000/top-50-people/page=0">1</a></li>
+        <li class="page-item"><a class="page-link" href="http://localhost:3000/top-50-people/page=1">2</a></li>
+        <li class="page-item"><a class="page-link" href="http://localhost:3000/top-50-people/page=2">3</a></li>
+        <li class="page-item"><a class="page-link" href="http://localhost:3000/top-50-people/page=3">4</a></li>
+        <li class="page-item"><a class="page-link" href="http://localhost:3000/top-50-people/page=4">5</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </nav>
   </>        
   );
 };

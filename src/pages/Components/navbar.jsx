@@ -97,7 +97,7 @@ const SiteNavbar = () => {
                 </Link>
               </Nav.Link>
               <Nav.Link>
-                <Link to="/top-50-people" style={{ textDecoration: 'none', color: 'black' }}>
+                <Link to="/top-50-people/page=0" style={{ textDecoration: 'none', color: 'black' }}>
                   Top 50 people
                 </Link>
               </Nav.Link>
