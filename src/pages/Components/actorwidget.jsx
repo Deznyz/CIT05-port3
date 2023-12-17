@@ -1,11 +1,13 @@
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
-import { Link } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+
 
 
 const ActorWidget = ({ idx, nameId }) => {
   const [namesData, setNamesData] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchNamesData = async () => {
@@ -30,10 +32,16 @@ const ActorWidget = ({ idx, nameId }) => {
     return null;
   }
 
+  // Function to handle navigation and refresh
+  const handleNavigation = () => {
+    navigate(`/actor/${namesData.nameId}`);
+    window.location.reload(); // This will refresh the page
+  }
+
   return (
     <Col style={{ marginBottom: '20px' }}>
       <Card style={{ width: '17rem', textDecoration: 'none' }}>
-        <Link to={`/actor/${namesData.nameId}`} style={{ textDecoration: 'none' }}>
+      <div onClick={handleNavigation} style={{ textDecoration: 'none', cursor: 'pointer' }}>
           <Card.Body style={{ color: 'black' }}>
             {namesData.name ? (
               <Card.Title>{namesData.name}</Card.Title>
@@ -41,7 +49,7 @@ const ActorWidget = ({ idx, nameId }) => {
               <Card.Title>PLACEHOLDER {idx+1}</Card.Title>                )}
               <Card.Subtitle className="mb-2 text-muted">Rating: {namesData.avgNameRating}</Card.Subtitle>
           </Card.Body>
-        </Link>
+        </div>
       </Card>        
     </Col>
   );

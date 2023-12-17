@@ -19,6 +19,7 @@ const SiteNavbar = () => {
     e.preventDefault();
     if (searchText.trim() !== '') {
       navigate(`../search-result/${searchText}`);
+      window.location.reload();
     }
   };
 
