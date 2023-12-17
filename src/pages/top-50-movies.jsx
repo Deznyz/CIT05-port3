@@ -77,6 +77,21 @@ const TopFiftyMovies = () => {
       </Row>
     </Container>
     </Stack>  
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-end">
+        <li class="page-item disabled">
+          <a class="page-link">Previous</a>
+        </li>
+        <li class="page-item"><a class="http://localhost:5001/api/frontend?0&pagesize=10" href="#">1</a></li>
+        <li class="page-item"><a class="http://localhost:5001/api/frontend?1&pagesize=10" href="#">2</a></li>
+        <li class="page-item"><a class="http://localhost:5001/api/frontend?2&pagesize=10" href="#">3</a></li>
+        <li class="page-item"><a class="http://localhost:5001/api/frontend?3&pagesize=10" href="#">4</a></li>
+        <li class="page-item"><a class="http://localhost:5001/api/frontend?4&pagesize=10" href="#">5</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </nav>
     </div>
   </> 
   );    
