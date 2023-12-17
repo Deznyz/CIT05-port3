@@ -14,7 +14,7 @@ const TopFiftyActors = () => {
   const [namesData, setNamesData] = useState({ items: [] });
   const [knownforData, setKnownforData] = useState({ items: [] });
   const [frontendData, setFrontendData] = useState({ items: [] });
-  const [movieData, setMovieData] = useState({ items: [] });
+
 
 
 
