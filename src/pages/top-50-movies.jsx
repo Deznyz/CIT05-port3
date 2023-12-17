@@ -82,11 +82,11 @@ const TopFiftyMovies = () => {
         <li class="page-item disabled">
           <a class="page-link">Previous</a>
         </li>
-        <li class="page-item"><a class="page-link" href="http://localhost:3000/top-50-titles/page=1">1</a></li>
-        <li class="page-item"><a class="page-link" href="#http://localhost:3000/top-50-titles/page=2">2</a></li>
-        <li class="page-item"><a class="page-link" href="http://localhost:3000/top-50-titles/page=3">3</a></li>
-        <li class="page-item"><a class="page-link" href="http://localhost:3000/top-50-titles/page=4">4</a></li>
-        <li class="page-item"><a class="page-link" href="#">5</a></li>
+        <li class="page-item"><a class="page-link" href="http://localhost:3000/top-50-titles/page=0">1</a></li>
+        <li class="page-item"><a class="page-link" href="http://localhost:3000/top-50-titles/page=1">2</a></li>
+        <li class="page-item"><a class="page-link" href="http://localhost:3000/top-50-titles/page=2">3</a></li>
+        <li class="page-item"><a class="page-link" href="http://localhost:3000/top-50-titles/page=3">4</a></li>
+        <li class="page-item"><a class="page-link" href="http://localhost:3000/top-50-titles/page=4">5</a></li>
         <li class="page-item">
           <a class="page-link" href="#">Next</a>
         </li>
