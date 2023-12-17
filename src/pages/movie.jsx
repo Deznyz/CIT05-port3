@@ -7,6 +7,7 @@ import Container from 'react-bootstrap/Container';
 import ActorWidget from './Components/actorwidget';
 import { Row } from 'react-bootstrap';
 import Bookmark from './Components/bookmark-button';
+import RatingScale from './Components/ratingscale';
 
 
 const Movie = () => {
@@ -92,7 +93,7 @@ const Movie = () => {
       <SiteNavbar/>
       <div className="container mt-4">
       <Bookmark type={"bookmarkstitle"}/>
-        <div className="row">
+    <div className="row">
           <div className="col-md-4 mb-3"> 
             {frontendData.items.length > 0 && frontendData.items[0].poster ? (
               <img
@@ -116,11 +117,13 @@ const Movie = () => {
               Movie rating: {movieratingData.averageRating} with {movieratingData.numVotes} votes
             </p>
             <h3>Plot:</h3>
+            
             {frontendData.items.length > 0 && frontendData.items[0].plot ? (
               <p>{frontendData.items[0].plot}</p>
             ) : (
               <p>Loading...</p>
             )}
+            <RatingScale/>
           </div>
         </div>
         <div style={{

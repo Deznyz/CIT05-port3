@@ -28,6 +28,11 @@ const UserProfile = () => {
           <>
             <h1>User Profile Page</h1>
             <p>Welcome, {userData.username}!</p>
+            <img src='https://cdn.pixabay.com/photo/2017/08/11/08/22/under-construction-2629947_1280.jpg' alt='New things are coming'
+            style={{ width: '300px', height: '250px' }}/>
+            <p>This site is under construction, we are hoping to show off the users bookmarks off  titles and people, but also show the users ratings,
+              in version 2.</p>
+
           </>
         )}
       </CookieContent>
